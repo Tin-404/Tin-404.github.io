@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Lambda表达式 | LIFE</title><meta name="author" content="WENJD"><meta name="copyright" content="WENJD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Lambda表达式前言在日常开发中，我们很多时候需要用到Java 8的Lambda表达式，它允许把函数作为一个方法的参数，让我们的代码更优雅，更简洁。以下为常用的表达式写法。  .collect()用来起保存作用的函数  List转MapCollectors.toMap可以把一个List数组转成一个Map，代码如下 1234567891011121314151617public class Tes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lambda表达式">
+<meta property="og:url" content="https://tin-404.github.io/posts/bbcf5ff7.html">
+<meta property="og:site_name" content="LIFE">
+<meta property="og:description" content="Lambda表达式前言在日常开发中，我们很多时候需要用到Java 8的Lambda表达式，它允许把函数作为一个方法的参数，让我们的代码更优雅，更简洁。以下为常用的表达式写法。  .collect()用来起保存作用的函数  List转MapCollectors.toMap可以把一个List数组转成一个Map，代码如下 1234567891011121314151617public class Tes">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.328888.xyz/2023/04/23/iScNrQ.png">
+<meta property="article:published_time" content="2023-04-23T14:57:38.000Z">
+<meta property="article:modified_time" content="2023-04-24T13:15:42.138Z">
+<meta property="article:author" content="WENJD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/04/23/iScNrQ.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://tin-404.github.io/posts/bbcf5ff7.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="#3b70fc"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/128.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="mask-icon" href="/img/siteicon/128.png" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Lambda表达式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-24 21:15:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.328888.xyz/2023/04/23/iScNrQ.png')"><nav id="nav"><span id="blog-info"><a href="/" title="LIFE"><span class="site-name">LIFE</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Lambda表达式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-23T14:57:38.000Z" title="发表于 2023-04-23 22:57:38">2023-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-24T13:15:42.138Z" title="更新于 2023-04-24 21:15:42">2023-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Lambda表达式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在日常开发中，我们很多时候需要用到<code>Java 8</code>的<code>Lambda</code>表达式，它允许把函数作为一个方法的参数，让我们的代码更优雅，更简洁。以下为常用的表达式写法。</p>
+<blockquote>
+<p><strong>.collect()</strong>用来起保存作用的函数</p>
+</blockquote>
+<h2 id="List转Map"><a href="#List转Map" class="headerlink" title="List转Map"></a>List转Map</h2><p>Collectors.toMap可以把一个List数组转成一个Map，代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestLanbda</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;UserInfo&gt; userInfoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">1L</span>, <span class="string">&quot;采蘑菇的小姑娘&quot;</span>,<span class="number">18</span>));</span><br><span class="line">        userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;程序员男孩&quot;</span>, <span class="number">22</span>));</span><br><span class="line">        userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;捡瓶子的小姑娘&quot;</span>, <span class="number">20</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *  List转Map</span></span><br><span class="line"><span class="comment">         *  使用Collectors.toMap的时候，如果有重复会报错，所以需要加(k1,k2) -&gt; k1</span></span><br><span class="line"><span class="comment">         *  (k1, k2) -&gt; k1 表示，如果有重复的key，则保留第一个，舍弃第二个</span></span><br><span class="line"><span class="comment">         */</span>  </span><br><span class="line">        Map&lt;Long,UserInfo&gt; userInfoMap = userInfoList.stream().collect(Collectors.toMap(UserInfo::getUserId, userInfo -&gt; userInfo, (k1, k2) -&gt; k1));</span><br><span class="line">        userInfoMap.values().forEach(a -&gt; System.out.println(a.getUserName()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>toMap()</code>函数之后，返回的就是一个<code>Map</code>了，自然会需要<code>key</code>和<code>value</code></p>
+<blockquote>
+<p>第一个参数用来生成<code>key</code>值<br>第二个参数用来生成<code>value</code>值<br>第三个参数用在key值冲突的情况下：如果新元素产生的key在Map中已经出现过了，第三个参数就会定义解决的方法。</p>
+</blockquote>
+<p>在.collect(Collectors.toMap(Person::getId, v -&gt; v, (a,b) -&gt; a)):<br>第一个参数：Person:getId表示选择Person的getId作为map的key值；<br>第二个参数：v -&gt; v表示选择将原来的对象作为Map的value值<br>第三个参数：(a,b) -&gt; a中，如果a与b的key值相同，选择a作为那个key所对应的value值。</p>
+<p>类似的，还有Collectors.toList()、Collectors.toSet()，表示把对应的流转化为List或Set。</p>
+<p><br></p>
+<h2 id="Filter-过滤"><a href="#Filter-过滤" class="headerlink" title="Filter()过滤"></a>Filter()过滤</h2><p>从数组集合中，过滤掉不符合条件的元素，留下符合条件的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">List&lt;UserInfo&gt; userInfoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">1L</span>, <span class="string">&quot;采蘑菇的小姑娘&quot;</span>,<span class="number">18</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;程序员男孩&quot;</span>, <span class="number">22</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;捡瓶子的小姑娘&quot;</span>, <span class="number">20</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * filter过滤，留下年龄大于18的用户 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">List&lt;UserInfo&gt; userInfoResultList = userInfoList.stream().filter(user -&gt; user.getAge() &gt; <span class="number">18</span>).collect(Collectors.toList());</span><br><span class="line">userInfoResultList.forEach(a -&gt; System.out.println(a.getUserName()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">程序员男孩</span><br><span class="line">捡瓶子的小姑娘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="forEach-循环"><a href="#forEach-循环" class="headerlink" title="forEach()循环"></a>forEach()循环</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * forEach 遍历集合List集合 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">List&lt;String&gt; userNameList = Arrays.asList(<span class="string">&quot;采蘑菇的小姑娘&quot;</span>,<span class="string">&quot;程序员男孩&quot;</span>,<span class="string">&quot;捡瓶子的小姑娘&quot;</span>);</span><br><span class="line">userNameList.forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">HashMap&lt;String, String&gt; hashMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">hashMap.put(<span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;采蘑菇的小姑娘&quot;</span>);</span><br><span class="line">hashMap.put(<span class="string">&quot;职业&quot;</span>, <span class="string">&quot;程序员男孩&quot;</span>);</span><br><span class="line">hashMap.put(<span class="string">&quot;昵称&quot;</span>, <span class="string">&quot;捡瓶子的小姑娘&quot;</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  forEach 遍历集合Map</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">hashMap.forEach((k, v) -&gt; System.out.println(k + <span class="string">&quot;:\t&quot;</span> + v));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">采蘑菇的小姑娘</span><br><span class="line">程序员男孩</span><br><span class="line">捡瓶子的小姑娘</span><br><span class="line">姓名:采蘑菇的小姑娘</span><br><span class="line">职业:程序员男孩</span><br><span class="line">昵称:捡瓶子的小姑娘</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="groupingBy分组"><a href="#groupingBy分组" class="headerlink" title="groupingBy分组"></a>groupingBy分组</h2><p>提到分组，相信大家都会想到<strong>SQL</strong>的<strong>group by</strong>。我们经常需要一个List做分组操作。比如，按城市分组用户。在Java8之前，是这么实现的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">List&lt;UserInfo&gt; userInfoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">1L</span>, <span class="string">&quot;采蘑菇的小姑娘&quot;</span>,<span class="number">18</span>, <span class="string">&quot;沈阳&quot;</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;程序员男孩&quot;</span>, <span class="number">22</span>, <span class="string">&quot;深圳&quot;</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;捡瓶子的小姑娘&quot;</span>, <span class="number">20</span>, <span class="string">&quot;沈阳&quot;</span>));</span><br><span class="line"></span><br><span class="line">Map&lt;String, List&lt;UserInfo&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (UserInfo userInfo : UserInfoList) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">city</span> <span class="operator">=</span> userInfo.getCity();</span><br><span class="line">    List&lt;UserInfo&gt; userInfos = result.get(city);</span><br><span class="line">    <span class="keyword">if</span> (userInfos == <span class="literal">null</span>) &#123;</span><br><span class="line">        userInfos = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        result.put(city, userInfos);</span><br><span class="line">    &#125;</span><br><span class="line">    userInfos.add(userInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而使用Java8的<code>groupingby</code>分组器，则很简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,List&lt;UserInfo&gt;&gt; result = userInfoList.stream()</span><br><span class="line">.collect(Collectors.groupingBy(UserInfo::getCity))</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="sorted-Comparator排序"><a href="#sorted-Comparator排序" class="headerlink" title="sorted + Comparator排序"></a>sorted + Comparator排序</h2><p>在实际编写代码中，排序的需求比较多，使用<strong>sorted+Comparator</strong>排序可以简化很多<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">List&lt;UserInfo&gt; userInfoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">1L</span>, <span class="string">&quot;采蘑菇的小姑娘&quot;</span>,<span class="number">18</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;程序员男孩&quot;</span>, <span class="number">22</span>));</span><br><span class="line">userInfoList.add(<span class="keyword">new</span> <span class="title class_">UserInfo</span>(<span class="number">2L</span>, <span class="string">&quot;捡瓶子的小姑娘&quot;</span>, <span class="number">20</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * sorted + Comparator.comparing 排序列表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">userInfoList = userInfoList.stream().sorted(Comparator.comparing(UserInfo::getAge)).collect(Collectors.toList());</span><br><span class="line">System.out.println(<span class="string">&quot;开始升序排序&quot;</span>)</span><br><span class="line">userInfo.forEach(a -&gt; System.out.println(a.toString()));</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果想要降序排序，可以使用加reversed()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">System.out.println(<span class="string">&quot;开始降序排序&quot;</span>)</span><br><span class="line">userInfoList = userInfoList.stream().sorted(Comparator.comparing(UserInfo::getAge).reversed()).collect(Collectors.toList());</span><br><span class="line">userInfo.forEach(a -&gt; System.out.println(a.toString()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">开始升序排序</span><br><span class="line">userInfo&#123;userId = <span class="number">1</span>, userName = <span class="string">&#x27;采蘑菇的小姑娘&#x27;</span>, age = <span class="number">18</span>&#125;</span><br><span class="line">userInfo&#123;userId = <span class="number">3</span>, userName = <span class="string">&#x27;捡瓶子的小姑娘&#x27;</span>, age = <span class="number">20</span>&#125;</span><br><span class="line">userInfo&#123;userId = <span class="number">2</span>, userName = <span class="string">&#x27;程序员男孩&#x27;</span>, age = <span class="number">22</span>&#125;</span><br><span class="line">开始降序排序</span><br><span class="line">userInfo&#123;userId = <span class="number">2</span>, userName = <span class="string">&#x27;程序员男孩&#x27;</span>, age = <span class="number">22</span>&#125;</span><br><span class="line">userInfo&#123;userId = <span class="number">3</span>, userName = <span class="string">&#x27;捡瓶子的小姑娘&#x27;</span>, age = <span class="number">20</span>&#125;</span><br><span class="line">userInfo&#123;userId = <span class="number">1</span>, userName = <span class="string">&#x27;采蘑菇的小姑娘&#x27;</span>, age = <span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="distinct-去重"><a href="#distinct-去重" class="headerlink" title="distinct()去重"></a>distinct()去重</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;F&quot;</span>,<span class="string">&quot;A&quot;</span>,<span class="string">&quot;C&quot;</span>);</span><br><span class="line">List&lt;String&gt; temp = list.stream().distinct().collect(Collectors.toList());</span><br><span class="line">temp.forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">//运行结果</span></span><br><span class="line">A</span><br><span class="line">B</span><br><span class="line">F</span><br><span class="line">C</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="findFirst-返回第一个"><a href="#findFirst-返回第一个" class="headerlink" title="findFirst()返回第一个"></a>findFirst()返回第一个</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;F&quot;</span>,<span class="string">&quot;A&quot;</span>,<span class="string">&quot;C&quot;</span>);</span><br><span class="line">list.stream().findFirst().ifPresent(System.out::println);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="anyMatch-和allMatch-匹配"><a href="#anyMatch-和allMatch-匹配" class="headerlink" title="anyMatch()和allMatch()匹配"></a>anyMatch()和allMatch()匹配</h2><p><strong>anyMatch()检查流是否包含至少一个满足要求</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;D&quot;</span>);</span><br><span class="line"><span class="type">boolean</span> <span class="variable">match</span> <span class="operator">=</span> stream.anyMatch(s -&gt; s.contains(<span class="string">&quot;C&quot;</span>));</span><br><span class="line">System.out.println(match);</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure><br><strong>allMatch()检查流是否所有都满足</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;D&quot;</span>);</span><br><span class="line"><span class="type">boolean</span> <span class="variable">match</span> <span class="operator">=</span> stream.anyMatch(s -&gt; s.length() == <span class="number">1</span>);</span><br><span class="line">System.out.println(match);</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="常用函数式接口"><a href="#常用函数式接口" class="headerlink" title="常用函数式接口"></a>常用函数式接口</h2><p>函数式接口(Functional Interface)就是<strong>一个有且仅有一个抽象方法，但是可以有多个非抽象方法的接口</strong><br>函数式接口可以被隐式转换为<code>Lambda</code>表达式<br><code>Lambda</code>表达式和方法引用(实际上也可认为是<code>Lambda</code>表达式)上</p>
+<h3 id="常见的函数式接口"><a href="#常见的函数式接口" class="headerlink" title="常见的函数式接口"></a>常见的函数式接口</h3><ul>
+<li><code>Function&lt;T, R&gt;</code>(转换型):接收一个输入参数，返回一个结果</li>
+<li><code>Comsumer&lt;T&gt;</code>(消费型):接收一个输入参数，并且无返回操作</li>
+<li><code>Predicate&lt;T&gt;</code>(判断型):接收一个输入参数，并且返回布尔值结果</li>
+<li><code>Supplier&lt;T&gt;</code>(供给型):无参数，无返回结果</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tin-404.github.io">WENJD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tin-404.github.io/posts/bbcf5ff7.html">https://tin-404.github.io/posts/bbcf5ff7.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tin-404.github.io" target="_blank">LIFE</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.328888.xyz/2023/04/23/iScNrQ.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/a708a60d.html" title="装饰者模式"><img class="cover" src="https://tse2-mm.cn.bing.net/th/id/OIP-C.bDK0Tg5zzewZP2CjFN-wswHaEX?pid=ImgDet&amp;rs=1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">装饰者模式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WENJD</div><div class="author-info__description">一个有趣的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Tin-404"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List%E8%BD%ACMap"><span class="toc-number">1.2.</span> <span class="toc-text">List转Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter-%E8%BF%87%E6%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">Filter()过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#forEach-%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.4.</span> <span class="toc-text">forEach()循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#groupingBy%E5%88%86%E7%BB%84"><span class="toc-number">1.5.</span> <span class="toc-text">groupingBy分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sorted-Comparator%E6%8E%92%E5%BA%8F"><span class="toc-number">1.6.</span> <span class="toc-text">sorted + Comparator排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#distinct-%E5%8E%BB%E9%87%8D"><span class="toc-number">1.7.</span> <span class="toc-text">distinct()去重</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#findFirst-%E8%BF%94%E5%9B%9E%E7%AC%AC%E4%B8%80%E4%B8%AA"><span class="toc-number">1.8.</span> <span class="toc-text">findFirst()返回第一个</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#anyMatch-%E5%92%8CallMatch-%E5%8C%B9%E9%85%8D"><span class="toc-number">1.9.</span> <span class="toc-text">anyMatch()和allMatch()匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.10.</span> <span class="toc-text">常用函数式接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.10.1.</span> <span class="toc-text">常见的函数式接口</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/bbcf5ff7.html" title="Lambda表达式"><img src="https://i.328888.xyz/2023/04/23/iScNrQ.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lambda表达式"/></a><div class="content"><a class="title" href="/posts/bbcf5ff7.html" title="Lambda表达式">Lambda表达式</a><time datetime="2023-04-23T14:57:38.000Z" title="发表于 2023-04-23 22:57:38">2023-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a708a60d.html" title="装饰者模式"><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.bDK0Tg5zzewZP2CjFN-wswHaEX?pid=ImgDet&amp;rs=1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="装饰者模式"/></a><div class="content"><a class="title" href="/posts/a708a60d.html" title="装饰者模式">装饰者模式</a><time datetime="2023-04-23T02:15:41.000Z" title="发表于 2023-04-23 10:15:41">2023-04-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/364ea8cc.html" title="单例模式"><img src="https://www.runoob.com/wp-content/uploads/2014/08/62576915-36E0-4B67-B078-704699CA980A.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="单例模式"/></a><div class="content"><a class="title" href="/posts/364ea8cc.html" title="单例模式">单例模式</a><time datetime="2023-04-20T11:44:59.000Z" title="发表于 2023-04-20 19:44:59">2023-04-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a80d0031.html" title="动态规划">动态规划</a><time datetime="2023-04-17T02:46:26.000Z" title="发表于 2023-04-17 10:46:26">2023-04-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/735e5788.html" title="排序算法">排序算法</a><time datetime="2023-04-14T02:21:54.000Z" title="发表于 2023-04-14 10:21:54">2023-04-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By WENJD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="app-refresh" id="app-refresh" style="position: fixed;top: -2.2rem;left: 0;right: 0;z-index: 99999;padding: 0 1rem;font-size: 15px;height: 2.2rem;transition: all 0.3s ease;"><div class="app-refresh-wrap" style=" display: flex;color: #fff;height: 100%;align-items: center;justify-content: center;"><label>✨ 有新文章啦！ 👉</label><a href="javascript:void(0)" onclick="location.reload()"><span style="color: #fff;text-decoration: underline;cursor: pointer;">🍗点击食用🍔</span></a></div></div><script>if ('serviceWorker' in navigator) {
+if (navigator.serviceWorker.controller) {
+navigator.serviceWorker.addEventListener('controllerchange', function() {
+showNotification()
+})
+}
+window.addEventListener('load', function() {
+navigator.serviceWorker.register('/sw.js')
+})
+}
+function showNotification() {
+if (GLOBAL_CONFIG.Snackbar) {
+var snackbarBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+GLOBAL_CONFIG.Snackbar.bgLight :
+GLOBAL_CONFIG.Snackbar.bgDark
+var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+Snackbar.show({
+text: '✨ 有新文章啦！ 👉',
+backgroundColor: snackbarBg,
+duration: 500000,
+pos: snackbarPos,
+actionText: '🍗点击食用🍔',
+actionTextColor: '#fff',
+onActionClick: function(e) {
+location.reload()
+},
+})
+} else {
+var showBg =
+document.documentElement.getAttribute('data-theme') === 'light' ?
+'#3b70fc' :
+'#1f1f1f'
+var cssText = `top: 0; background: ${showBg};`
+document.getElementById('app-refresh').style.cssText = cssText
+}
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div><!-- hexo injector body_end start --><script async src="/js/ali_font.js"></script><!-- hexo injector body_end end --></body></html>
